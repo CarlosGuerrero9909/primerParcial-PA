@@ -17,7 +17,7 @@ public class Conexion {
     private static Driver driver = new org.apache.derby.jdbc.ClientDriver();
     private static String URLBD = "jdbc:derby://localhost:1527/GRANJA";
     private static String usuario = "granja";
-    private static String contrasena = "granaja";
+    private static String contrasena = "granja";
 
     public static Connection getConexion() throws SQLException {
         DriverManager.registerDriver(driver);
