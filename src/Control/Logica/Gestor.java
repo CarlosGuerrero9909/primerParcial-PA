@@ -4,12 +4,22 @@ import Control.Dao.AnimalDAO;
 import Modelo.AnimalVO;
 import Vista.VtnInsertar;
 import Vista.VtnPrincipal;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.Properties;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,6 +33,9 @@ public class Gestor implements ActionListener {
 	private File file;
 	private AnimalDAO miAnimalDAO;
 	private ArrayList<AnimalVO> listaAnimales;
+	private int index;
+	private AudioInputStream audioInputStream;
+	private Clip clip;
 
 	/**
 	 * Metodo constructor de la clase Gestor, encargado de iniciar los objetos y principales
@@ -33,16 +46,21 @@ public class Gestor implements ActionListener {
 	 */
 	public Gestor(VtnPrincipal vtnPrin, AnimalVO animal) {
 		this.vtnPrin = vtnPrin;
+		index = 0;
+		listaAnimales = new ArrayList<AnimalVO>();
+
 		dataProperties = new Properties();
 		dataProperties = cargarProperties();
+		// guarda informacion de archivo properties en arraylist
+		guardarPropiedadesEnArrayList();
+		// se carga el primer animal en la GUI
+		cargarAnimalEnVtnPrincipal(index);
 
 		// CREAR METODO PARA PASAR PROPERTIES A LA BASE DE DATOS
 		// Nombre del metodo
 		// obtener registros de la base de datos
-		obtenerRegistrosBaseDeDatos();
+			//obtenerRegistrosBaseDeDatos();
 
-		// guarda informacion de archivo properties en arraylist
-		//guardarPropiedadesEnArrayList();
 		this.vtnPrin.jBtnAnterior.addActionListener(this);
 		this.vtnPrin.jBtnEliminar.addActionListener(this);
 		this.vtnPrin.jBtnInsertar.addActionListener(this);
@@ -112,9 +130,8 @@ public class Gestor implements ActionListener {
 	 * Metodo para rellenar al arrayList con cada propiedad de cada objeto que está alojado en el
 	 * archivo properties
 	 */
-	/*public void guardarPropiedadesEnArrayList() {
+	public void guardarPropiedadesEnArrayList() {
 		for (int i = 1; i <= Integer.parseInt(dataProperties.getProperty("cantidadAnimales")); i++) {
-
 			String filum = dataProperties.getProperty("animal" + i + ".filum");
 			String subfilum = dataProperties.getProperty("animal" + i + ".subfilum");
 			String clase = dataProperties.getProperty("animal" + i + ".clase");
@@ -125,15 +142,52 @@ public class Gestor implements ActionListener {
 			String nombre = dataProperties.getProperty("animal" + i + ".nombre");
 			String imagen = dataProperties.getProperty("animal" + i + ".imagen");
 			String sonido = dataProperties.getProperty("animal" + i + ".sonido");
-
 			// nuevo objeto
 			AnimalVO animal = new AnimalVO(filum, subfilum, clase, orden, familia, genero, especie, nombre, imagen, sonido);
+			// se ingresa al arraylist el animal
+			listaAnimales.add(animal);
+		}
 
-			// se ingresa al arraylist la animal
-			animalesArray.add(animal);
+	}
+	
+	/**
+	 * 
+	 * @param index 
+	 */
+	public void cargarAnimalEnVtnPrincipal(int index) {
+		// asignando imagenes
+		ImageIcon imagen = new ImageIcon(getClass().getResource(listaAnimales.get(index).getImagen()));
+		Icon icon = new ImageIcon(imagen.getImage().getScaledInstance(vtnPrin.jBtnImagen.getWidth(), vtnPrin.jBtnImagen.getHeight(), Image.SCALE_DEFAULT));
+		vtnPrin.jBtnImagen.setIcon(icon);
 
-			}
-		}*/
+		// asignando informacion
+		vtnPrin.jTfClase.setText(listaAnimales.get(index).getClase());
+		vtnPrin.jTfEspecie.setText(listaAnimales.get(index).getEspecie());
+		vtnPrin.jTfFamilia.setText(listaAnimales.get(index).getFamilia());
+		vtnPrin.jTfFilum.setText(listaAnimales.get(index).getFilum());
+		vtnPrin.jTfGenero.setText(listaAnimales.get(index).getGenero());
+		vtnPrin.jTfNombre.setText(listaAnimales.get(index).getNombre());
+		vtnPrin.jTfOrden.setText(listaAnimales.get(index).getOrden());
+		vtnPrin.jTfSubFilum.setText(listaAnimales.get(index).getSubfilum());
+
+	}
+	
+	/**
+	 * 
+	 * @param index 
+	 */
+	public void reproducirSonidoAnimal(int index) {
+		
+		try {
+			audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath() + listaAnimales.get(index).getSonido()));
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	/**
 	 * Metodo sobreescrito de la Clase ActionListener, donde con el parametro se capturara el evento
 	 * respectivo a cada jBtn para ejecutar las respectivas acciones
@@ -148,9 +202,6 @@ public class Gestor implements ActionListener {
 			vtnIns.setLocationRelativeTo(null);
 			vtnIns.setVisible(true);
 		}
-		if (e.getSource() == vtnPrin.jBtnAnterior) {
-
-		}
 		if (e.getSource() == vtnPrin.jBtnEliminar) {
 
 		}
@@ -158,13 +209,18 @@ public class Gestor implements ActionListener {
 
 		}
 		if (e.getSource() == vtnPrin.jBtnPlaySonido) {
-
+			reproducirSonidoAnimal(index);
 		}
 		if (e.getSource() == vtnPrin.jBtnSiguiente) {
-
+			index++;
+			cargarAnimalEnVtnPrincipal(index);
+		}
+		if (e.getSource() == vtnPrin.jBtnAnterior) {
+			index--;
+			cargarAnimalEnVtnPrincipal(index);
 		}
 		if (e.getSource() == vtnPrin.jBtnStopSonido) {
-
+			clip.stop();
 		}
 		if (e.getSource() == vtnPrin.jBtnSalir) {
 			vtnPrin.setVisible(false);
