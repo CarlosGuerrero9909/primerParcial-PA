@@ -100,10 +100,8 @@ public class Gestor implements ActionListener {
 	private void obtenerRegistrosBaseDeDatos() {
 
 		miAnimalDAO = new AnimalDAO();
-
 		// le pide al dao la lista de animales porque es la que hace la consulta
 		listaAnimales = miAnimalDAO.listaDeAnimales();
-
 		if (listaAnimales.size() == 0) {
 			// mostrar ventana emergente
 			VtnPrincipal.mostrarJOptionPane(3);
@@ -115,27 +113,27 @@ public class Gestor implements ActionListener {
 	 * archivo properties
 	 */
 	/*public void guardarPropiedadesEnArrayList() {
-        for (int i = 1; i <= Integer.parseInt(dataProperties.getProperty("cantidadAnimales")); i++) {
+		for (int i = 1; i <= Integer.parseInt(dataProperties.getProperty("cantidadAnimales")); i++) {
 
-            String filum = dataProperties.getProperty("animal" + i + ".filum");
-            String subfilum = dataProperties.getProperty("animal" + i + ".subfilum");
-            String clase = dataProperties.getProperty("animal" + i + ".clase");
-            String orden = dataProperties.getProperty("animal" + i + ".orden");
-            String familia = dataProperties.getProperty("animal" + i + ".familia");
-            String genero = dataProperties.getProperty("animal" + i + ".genero");
-            String especie = dataProperties.getProperty("animal" + i + ".especie");
-            String nombre = dataProperties.getProperty("animal" + i + ".nombre");
-            String imagen = dataProperties.getProperty("animal" + i + ".imagen");
-            String sonido = dataProperties.getProperty("animal" + i + ".sonido");
+			String filum = dataProperties.getProperty("animal" + i + ".filum");
+			String subfilum = dataProperties.getProperty("animal" + i + ".subfilum");
+			String clase = dataProperties.getProperty("animal" + i + ".clase");
+			String orden = dataProperties.getProperty("animal" + i + ".orden");
+			String familia = dataProperties.getProperty("animal" + i + ".familia");
+			String genero = dataProperties.getProperty("animal" + i + ".genero");
+			String especie = dataProperties.getProperty("animal" + i + ".especie");
+			String nombre = dataProperties.getProperty("animal" + i + ".nombre");
+			String imagen = dataProperties.getProperty("animal" + i + ".imagen");
+			String sonido = dataProperties.getProperty("animal" + i + ".sonido");
 
-            // nuevo objeto
-            AnimalVO animal = new AnimalVO(filum, subfilum, clase, orden, familia, genero, especie, nombre, imagen, sonido);
+			// nuevo objeto
+			AnimalVO animal = new AnimalVO(filum, subfilum, clase, orden, familia, genero, especie, nombre, imagen, sonido);
 
-            // se ingresa al arraylist la animal
-            animalesArray.add(animal);
+			// se ingresa al arraylist la animal
+			animalesArray.add(animal);
 
-        }
-    }*/
+			}
+		}*/
 	/**
 	 * Metodo sobreescrito de la Clase ActionListener, donde con el parametro se capturara el evento
 	 * respectivo a cada jBtn para ejecutar las respectivas acciones
