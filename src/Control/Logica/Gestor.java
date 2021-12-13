@@ -214,10 +214,12 @@ public class Gestor implements ActionListener {
 		if (e.getSource() == vtnPrin.jBtnSiguiente) {
 			index++;
 			cargarAnimalEnVtnPrincipal(index);
+			clip.stop();
 		}
 		if (e.getSource() == vtnPrin.jBtnAnterior) {
 			index--;
 			cargarAnimalEnVtnPrincipal(index);
+			clip.stop();
 		}
 		if (e.getSource() == vtnPrin.jBtnStopSonido) {
 			clip.stop();
