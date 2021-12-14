@@ -48,7 +48,7 @@ public class Gestor implements ActionListener {
 		this.vtnPrin = vtnPrin;
 		index = 0;
 		listaAnimales = new ArrayList<AnimalVO>();
-
+		// inicializacion de los atributos que cargaran el archivo properties
 		dataProperties = new Properties();
 		dataProperties = cargarProperties();
 		// guarda informacion de archivo properties en arraylist
@@ -59,8 +59,9 @@ public class Gestor implements ActionListener {
 		// CREAR METODO PARA PASAR PROPERTIES A LA BASE DE DATOS
 		// Nombre del metodo
 		// obtener registros de la base de datos
-			//obtenerRegistrosBaseDeDatos();
-
+		//obtenerRegistrosBaseDeDatos();
+			
+		// se preparan los botones de la interfaz para que pueden escuchar instrucciones
 		this.vtnPrin.jBtnAnterior.addActionListener(this);
 		this.vtnPrin.jBtnEliminar.addActionListener(this);
 		this.vtnPrin.jBtnInsertar.addActionListener(this);
@@ -102,7 +103,6 @@ public class Gestor implements ActionListener {
 			if (!propiedades.isEmpty()) { // si no está vacio
 				return propiedades;
 			}
-
 		} catch (Exception e) {
 			// mostrar ventana emergente
 			VtnPrincipal.mostrarJOptionPane(0);
@@ -116,7 +116,6 @@ public class Gestor implements ActionListener {
 	 * Recoge el arraylist con todos los animales registrados en la base de datos
 	 */
 	private void obtenerRegistrosBaseDeDatos() {
-
 		miAnimalDAO = new AnimalDAO();
 		// le pide al dao la lista de animales porque es la que hace la consulta
 		listaAnimales = miAnimalDAO.listaDeAnimales();
@@ -147,12 +146,14 @@ public class Gestor implements ActionListener {
 			// se ingresa al arraylist el animal
 			listaAnimales.add(animal);
 		}
-
 	}
-	
+
 	/**
+	 *Metodo encargado de cargar la informacion del animal en la GUI segun el indice que recibe como parametro, este indice es un 
+	 * atributo de la clase utilizado para controlar el animal de la lista de animales que se mostrara segun sea la opturacion de
+	 * los botones anterior y siguiente
 	 * 
-	 * @param index 
+	 * @param index
 	 */
 	public void cargarAnimalEnVtnPrincipal(int index) {
 		// asignando imagenes
@@ -169,15 +170,16 @@ public class Gestor implements ActionListener {
 		vtnPrin.jTfNombre.setText(listaAnimales.get(index).getNombre());
 		vtnPrin.jTfOrden.setText(listaAnimales.get(index).getOrden());
 		vtnPrin.jTfSubFilum.setText(listaAnimales.get(index).getSubfilum());
-
 	}
-	
+
 	/**
+	 *Metodo encargado de reproducir el sonido del animal segun el indice que recibe como parametro, este indice es un 
+	 * atributo de la clase utilizado para controlar el animal de la lista de animales que se mostrara segun sea la opturacion de
+	 * los botones anterior y siguiente
 	 * 
-	 * @param index 
+	 * @param index
 	 */
 	public void reproducirSonidoAnimal(int index) {
-		
 		try {
 			audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath() + listaAnimales.get(index).getSonido()));
 			clip = AudioSystem.getClip();
@@ -212,14 +214,30 @@ public class Gestor implements ActionListener {
 			reproducirSonidoAnimal(index);
 		}
 		if (e.getSource() == vtnPrin.jBtnSiguiente) {
-			index++;
-			cargarAnimalEnVtnPrincipal(index);
-			clip.stop();
+			/*se hace el control del indice utilizado con el boton siguiente para que este no sobre pase el limite 
+			del tamaño del arraylist*/
+			if (index < listaAnimales.size()-1) {
+				index++;
+				cargarAnimalEnVtnPrincipal(index);
+				try {
+					clip.stop();
+				} catch (NullPointerException ex) { }
+			}else{
+				vtnPrin.mostrarJOptionPane(3);
+			}
 		}
 		if (e.getSource() == vtnPrin.jBtnAnterior) {
-			index--;
-			cargarAnimalEnVtnPrincipal(index);
-			clip.stop();
+			/*se hace el control del indice utilizado con el boton anterior  para que este no sobre pase el limites del 
+			arraylist*/
+			if (index > 0) {
+				index--;
+				cargarAnimalEnVtnPrincipal(index);
+				try {
+					clip.stop();
+				} catch (NullPointerException ex) { }
+			}else{
+				vtnPrin.mostrarJOptionPane(3);
+			}
 		}
 		if (e.getSource() == vtnPrin.jBtnStopSonido) {
 			clip.stop();

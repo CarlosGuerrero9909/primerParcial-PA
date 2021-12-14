@@ -368,18 +368,20 @@ public class VtnPrincipal extends javax.swing.JFrame {
 			case 2:
 				JOptionPane.showMessageDialog(null, "Actualmente no existen registros de mascotas.", "Sin Registros", 2);
 				break;
+			case 3:
+				JOptionPane.showMessageDialog(null, "No hay mas animales en la lista.", "Limite alcanzado", 2);
 			/*case 3:
-                JOptionPane.showMessageDialog(rootPane, "No ha ingresado todos los datos, intente nuevamente", "Ingreso Incompleto", 2);
-                break;
-            /*case 4:
-                JOptionPane.showMessageDialog(rootPane, "El archivo se guardo satisfactoriamente", "Guardado Correcto", 2);
-                break;
-            /*case 5:
-                JOptionPane.showMessageDialog(rootPane, "No se pudo guardar el archivo, intente nuevamente.", "Guardado Incompleto", 2);
-                break;
-            /*case 6:
-                JOptionPane.showMessageDialog(buscarJB, "No se ha hallado ningun cliente con ese ID.", "Busqueda Erronea", 2);
-                break;*/
+				JOptionPane.showMessageDialog(rootPane, "No ha ingresado todos los datos, intente nuevamente", "Ingreso Incompleto", 2);
+				break;
+			/*case 4:
+				JOptionPane.showMessageDialog(rootPane, "El archivo se guardo satisfactoriamente", "Guardado Correcto", 2);
+				break;
+			/*case 5:
+				JOptionPane.showMessageDialog(rootPane, "No se pudo guardar el archivo, intente nuevamente.", "Guardado Incompleto", 2);
+				break;
+			/*case 6:
+				JOptionPane.showMessageDialog(buscarJB, "No se ha hallado ningun cliente con ese ID.", "Busqueda Erronea", 2);
+				break;*/
 		}
 
 	}
