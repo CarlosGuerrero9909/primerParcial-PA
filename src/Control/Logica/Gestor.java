@@ -208,7 +208,7 @@ public class Gestor implements ActionListener {
         // configuracion del boton agregar de la ventana insertar
         if (e.getSource() == vtnIns.jBtnAgregar) {
             // manejo error si no se ingresa datos para ingresar al animal
-            if ((vtnIns.jTfFilum.getText().length() == 0) || (vtnIns.jTfSubFilum.getText().length() == 0) || (vtnIns.jTfClase.getText().length() == 0) || (vtnIns.jTfOrden.getText().length() == 0) || (vtnIns.jTfFamilia.getText().length() == 0) || (vtnIns.jTfGenero.getText().length() == 0) || (vtnIns.jTfEspecie.getText().length() == 0) || (vtnIns.jTfNombre.getText().length() == 0) || (vtnIns.jTfDireImg.getText().length() == 0) || (vtnIns.jTfDireSon.getText().length() == 0)) {
+            if ((vtnIns.jTfFilum.getText().length() == 0) || (vtnIns.jTfSubFilum.getText().length() == 0) || (vtnIns.jTfClase.getText().length() == 0) || (vtnIns.jTfOrden.getText().length() == 0) || (vtnIns.jTfFamilia.getText().length() == 0) || (vtnIns.jTfGenero.getText().length() == 0) || (vtnIns.jTfEspecie.getText().length() == 0) || (vtnIns.jTfNombre.getText().length() == 0) || (vtnIns.jTfDireImg.getText().length() == 0) || (vtnIns.jTfDireImg.getText().length() == 0)) {
                 VtnPrincipal.mostrarJOptionPane(5);
             } else {
                 // ejecucion de metodo para agregar la persona al arraylist
