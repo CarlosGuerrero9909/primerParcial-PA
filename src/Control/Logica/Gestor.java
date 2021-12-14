@@ -223,7 +223,7 @@ public class Gestor implements ActionListener {
 					clip.stop();
 				} catch (NullPointerException ex) { }
 			}else{
-				vtnPrin.mostrarJOptionPane(3);
+				VtnPrincipal.mostrarJOptionPane(3);
 			}
 		}
 		if (e.getSource() == vtnPrin.jBtnAnterior) {
@@ -236,7 +236,7 @@ public class Gestor implements ActionListener {
 					clip.stop();
 				} catch (NullPointerException ex) { }
 			}else{
-				vtnPrin.mostrarJOptionPane(3);
+				VtnPrincipal.mostrarJOptionPane(3);
 			}
 		}
 		if (e.getSource() == vtnPrin.jBtnStopSonido) {
