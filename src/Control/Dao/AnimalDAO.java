@@ -58,6 +58,8 @@ public class AnimalDAO {
             VtnPrincipal.mostrarJOptionPane(4);
         }
     }
+    
+    /** Aca ira el metodo de eliminar*/
 
     /**
      * Metodo encargado de crear un arraylist de animales de acuerdo a la
