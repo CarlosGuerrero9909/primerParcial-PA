@@ -33,7 +33,7 @@ public class AnimalDAO {
 	}
 	
 	/**
-	 * recordemos que a la clase DAO le llegan objetos
+	 * Insertando datos a la base de datos recordemos que a la clase DAO le llegan objetos
 	 *
 	 * @param mascota
 	 */
@@ -47,8 +47,6 @@ public class AnimalDAO {
 			String insercion = "INSERT INTO Animales VALUES('" + animalRegistro.getFilum() + "','" + animalRegistro.getSubfilum() + "','" + animalRegistro.getClase() + "','" + animalRegistro.getOrden() + "','" + animalRegistro.getFamilia() + "','" + animalRegistro.getGenero() + "','" + animalRegistro.getEspecie() + "','" + animalRegistro.getNombre() + "','" + animalRegistro.getImagen() + "','" + animalRegistro.getSonido() + "')";
 			// se realiza una insercionm por lo que es Update
 			st.executeUpdate(insercion);
-			// Ventana emergente de confirmacion
-			VtnPrincipal.mostrarJOptionPane(6);
 			// cierra el statement
 			st.close();
 			// al terminar cierra la conexion (Importante)

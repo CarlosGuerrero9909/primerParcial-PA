@@ -53,15 +53,7 @@ public class Gestor implements ActionListener {
 		// obtener registros de la base de datos
 		obtenerRegistrosBaseDeDatos();
 		// si la base de datos no cuenta con registros, pide un archivo properties para agregarlos a la base de datos
-		if (listaAnimales.size() == 0) {
-			// inicializacion de los atributos que cargaran el archivo properties
-			dataProperties = new Properties();
-			dataProperties = cargarProperties();
-			// guarda informacion de archivo properties en la base de datos
-			guardarPropiedadesEnBaseDeDatos();
-			// obtener registros de la base de datos
-			obtenerRegistrosBaseDeDatos();
-		}
+		iniciandoProperties();
 		// se carga el primer animal en la GUI
 		cargarAnimalEnVtnPrincipal(index);
 		// se preparan los botones de la interfaz para que pueden escuchar instrucciones
@@ -75,7 +67,21 @@ public class Gestor implements ActionListener {
 		this.vtnPrin.jBtnStopSonido.addActionListener(this);
 		this.vtnIns.jBtnAgregar.addActionListener(this);
 	}
-
+	
+	public void iniciandoProperties(){
+		if (listaAnimales.isEmpty()) {
+			// inicializacion de los atributos que cargaran el archivo properties
+			dataProperties = new Properties();
+			dataProperties = cargarProperties();
+			// guarda informacion de archivo properties en la base de datos
+			guardarPropiedadesEnBaseDeDatos();
+			// Ventana emergente de confirmacion
+			VtnPrincipal.mostrarJOptionPane(6);
+			// obtener registros de la base de datos
+			obtenerRegistrosBaseDeDatos();
+		}
+	}
+	
 	/**
 	 * Metodo encargado de iniciar la ventana principal, dandole una posicion y un titulo
 	 */
@@ -185,7 +191,6 @@ public class Gestor implements ActionListener {
 
 	public void eliminarAnimal(int index) {
 		String nombreEliminar = listaAnimales.get(index).getNombre();
-		System.out.println(listaAnimales.get(index).getNombre());
 		if (miAnimalDAO.eliminarRegistro(nombreEliminar)) {
 			VtnPrincipal.mostrarJOptionPane(8);
 		} else {
@@ -218,6 +223,8 @@ public class Gestor implements ActionListener {
 			} else {
 				// ejecucion de metodo para agregar la persona al arraylist
 				agregarAnimalABaseDeDatos(vtnIns.jTfFilum.getText(), vtnIns.jTfSubFilum.getText(), vtnIns.jTfClase.getText(), vtnIns.jTfOrden.getText(), vtnIns.jTfFamilia.getText(), vtnIns.jTfGenero.getText(), vtnIns.jTfEspecie.getText(), vtnIns.jTfNombre.getText(), vtnIns.jTfDireImg.getText(), vtnIns.jTfDireSon.getText());
+				// Ventana emergente de confirmacion
+				VtnPrincipal.mostrarJOptionPane(6);
 				// obtener registros de la base de datos para actualizar con el animal nuevo
 				obtenerRegistrosBaseDeDatos();
 				// limpia casillas de la ventana de insertar
@@ -230,6 +237,9 @@ public class Gestor implements ActionListener {
 		if (e.getSource() == vtnPrin.jBtnEliminar) {
 			eliminarAnimal(index);
 			obtenerRegistrosBaseDeDatos();
+			iniciandoProperties();
+			index = 0;
+			cargarAnimalEnVtnPrincipal(index);
 		}
 		// configuracion del boton modificar de la ventana principal
 		if (e.getSource() == vtnPrin.jBtnModificar) {
