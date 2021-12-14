@@ -47,7 +47,7 @@ public class Gestor implements ActionListener {
 	public Gestor(VtnPrincipal vtnPrin, AnimalVO animal) {
 		this.vtnPrin = vtnPrin;
 		index = 0;
-		listaAnimales = new ArrayList<AnimalVO>();
+		listaAnimales = new ArrayList<>();
 		// inicializacion de los atributos que cargaran el archivo properties
 		dataProperties = new Properties();
 		dataProperties = cargarProperties();
@@ -127,7 +127,7 @@ public class Gestor implements ActionListener {
 
 	/**
 	 * Metodo para rellenar al arrayList con cada propiedad de cada objeto que está alojado en el
-	 * archivo properties
+	 * archivo properties (PENDIENTE PARA MODIFICACION CON BD)
 	 */
 	public void guardarPropiedadesEnArrayList() {
 		for (int i = 1; i <= Integer.parseInt(dataProperties.getProperty("cantidadAnimales")); i++) {
