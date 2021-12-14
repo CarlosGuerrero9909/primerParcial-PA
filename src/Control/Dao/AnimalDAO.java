@@ -58,6 +58,41 @@ public class AnimalDAO {
 	}
 	
 	/**
+	 * Modifica el campo de algun registro en la DB
+	 * @param codigo
+	 * @return 
+	 */
+	public boolean modificarRegistro(String nombreModificar, String clase, String especie, String familia, String filum, 
+			String genero, String orden, String subFilum) {
+		//Instruccion en sql
+		String consulta1 = "update Animales set clase ='" + clase + "' where nombre='" + nombreModificar + "'";
+		String consulta2 = "update Animales set especie ='" + especie + "' where nombre='" + nombreModificar + "'";
+		String consulta3 = "update Animales set familia = '" + familia + "' where nombre='" + nombreModificar + "'";
+		String consulta4 = "update Animales set filum = '" + filum + "' where nombre='" + nombreModificar + "'";
+		String consulta5 = "update Animales set genero ='" + genero + "' where nombre='" + nombreModificar + "'";
+		String consulta6 = "update Animales set orden ='" + orden + "' where nombre='" + nombreModificar + "'";
+		String consulta7 = "update Animales set subfilum ='" + subFilum + "' where nombre='" + nombreModificar + "'";
+		//String consulta = "update Animales set edad=" + 15 + " where id='" + nombreModificar + "'";
+		try {
+			con = Conexion.getConexion();// pedimos una conexion
+			st = con.createStatement(); // crea una consulta
+			st.executeUpdate(consulta1);//Eliminar , agregar o modificar va con update
+			st.executeUpdate(consulta2);
+			st.executeUpdate(consulta3);
+			st.executeUpdate(consulta4);
+			st.executeUpdate(consulta5);
+			st.executeUpdate(consulta6);
+			st.executeUpdate(consulta7);
+			st.close(); // cierra el stamenten porque ya se realizo la consulta
+			Conexion.desconectar(); // desconecta la DB
+			return true;
+		} catch (SQLException ex) {
+			VtnPrincipal.mostrarJOptionPane(9);
+		}
+		return false;
+	}
+	
+	/**
 	 * Eliminar
 	 *
 	 * @param codigo

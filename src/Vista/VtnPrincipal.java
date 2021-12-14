@@ -17,6 +17,7 @@ public class VtnPrincipal extends javax.swing.JFrame {
 	 */
 	public VtnPrincipal() {
 		initComponents();
+		jBtnTermMod.setVisible(false);
 	}
 
 	/**
@@ -57,6 +58,7 @@ public class VtnPrincipal extends javax.swing.JFrame {
         jBtnInsertar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jBtnSalir = new javax.swing.JButton();
+        jBtnTermMod = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,21 +254,30 @@ public class VtnPrincipal extends javax.swing.JFrame {
 
         jBtnSalir.setText("Salir");
 
+        jBtnTermMod.setText("Terminar Modificacion");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jBtnTermMod)
+                        .addGap(26, 26, 26))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jBtnTermMod, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,6 +326,7 @@ public class VtnPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton jBtnSalir;
     public javax.swing.JButton jBtnSiguiente;
     public javax.swing.JButton jBtnStopSonido;
+    public javax.swing.JButton jBtnTermMod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -385,6 +397,12 @@ public class VtnPrincipal extends javax.swing.JFrame {
 				break;
 			case 8:
 				JOptionPane.showMessageDialog(null, "Se elimino satisfactoriamente el animal", "Eliminacion realizada", 2);
+				break;
+			case 9:
+				JOptionPane.showMessageDialog(null, "No se pudo modificar el animal", "Modificacion fallida", 2);
+				break;
+			case 10:
+				JOptionPane.showMessageDialog(null, "Se modifico el animal", "Modificacion exitosa", 2);
 				break;
 			/*case 4:
 				JOptionPane.showMessageDialog(rootPane, "El archivo se guardo satisfactoriamente", "Guardado Correcto", 2);

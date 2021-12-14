@@ -65,10 +65,12 @@ public class Gestor implements ActionListener {
 		this.vtnPrin.jBtnSalir.addActionListener(this);
 		this.vtnPrin.jBtnSiguiente.addActionListener(this);
 		this.vtnPrin.jBtnStopSonido.addActionListener(this);
+		this.vtnPrin.jBtnTermMod.addActionListener(this);
 		this.vtnIns.jBtnAgregar.addActionListener(this);
+
 	}
-	
-	public void iniciandoProperties(){
+
+	public void iniciandoProperties() {
 		if (listaAnimales.isEmpty()) {
 			// inicializacion de los atributos que cargaran el archivo properties
 			dataProperties = new Properties();
@@ -81,7 +83,7 @@ public class Gestor implements ActionListener {
 			obtenerRegistrosBaseDeDatos();
 		}
 	}
-	
+
 	/**
 	 * Metodo encargado de iniciar la ventana principal, dandole una posicion y un titulo
 	 */
@@ -114,7 +116,7 @@ public class Gestor implements ActionListener {
 			if (!propiedades.isEmpty()) { // si no está vacio
 				return propiedades;
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			// mostrar ventana emergente
 			VtnPrincipal.mostrarJOptionPane(0);
 			// cerrar el programa
@@ -158,7 +160,7 @@ public class Gestor implements ActionListener {
 		// le pide al dao la lista de animales porque es la que hace la consulta
 		listaAnimales = miAnimalDAO.recuperarListaDeAnimalesDeBaseDeDatos();
 		// si el tamaño del arraylist es de 0 da una ventana emergente comunicando que no existen registros por lo que pedira que se seleccione una archivo properties
-		if (listaAnimales.size() == 0) {
+		if (listaAnimales.isEmpty()) {
 			// mostrar ventana emergente
 			VtnPrincipal.mostrarJOptionPane(2);
 		}
@@ -189,6 +191,10 @@ public class Gestor implements ActionListener {
 		vtnPrin.jTfSubFilum.setText(listaAnimales.get(index).getSubfilum());
 	}
 
+	/**
+	 *
+	 * @param index
+	 */
 	public void eliminarAnimal(int index) {
 		String nombreEliminar = listaAnimales.get(index).getNombre();
 		if (miAnimalDAO.eliminarRegistro(nombreEliminar)) {
@@ -196,6 +202,42 @@ public class Gestor implements ActionListener {
 		} else {
 			VtnPrincipal.mostrarJOptionPane(7);
 		}
+	}
+
+	/**
+	 *
+	 */
+	private void modificarAnimal() {
+		vtnPrin.jBtnTermMod.setVisible(true);
+		desbloquearTextField();
+		
+	}
+
+	/**
+	 *
+	 */
+	private void desbloquearTextField() {
+		vtnPrin.jTfClase.setEditable(true);
+		vtnPrin.jTfEspecie.setEditable(true);
+		vtnPrin.jTfFamilia.setEditable(true);
+		vtnPrin.jTfFilum.setEditable(true);
+		vtnPrin.jTfGenero.setEditable(true);
+		vtnPrin.jTfOrden.setEditable(true);
+		vtnPrin.jTfSubFilum.setEditable(true);
+	}
+
+	/**
+	 *
+	 */
+	private void bloquearTextField() {
+		vtnPrin.jTfClase.setEditable(false);
+		vtnPrin.jTfEspecie.setEditable(false);
+		vtnPrin.jTfFamilia.setEditable(false);
+		vtnPrin.jTfFilum.setEditable(false);
+		vtnPrin.jTfGenero.setEditable(false);
+		vtnPrin.jTfOrden.setEditable(false);
+		vtnPrin.jTfSubFilum.setEditable(false);
+
 	}
 
 	/**
@@ -243,7 +285,19 @@ public class Gestor implements ActionListener {
 		}
 		// configuracion del boton modificar de la ventana principal
 		if (e.getSource() == vtnPrin.jBtnModificar) {
-
+			modificarAnimal();
+		}
+		// configuracion del boton terminar modificacion de la ventana principal
+		if (e.getSource() == vtnPrin.jBtnTermMod) {
+			bloquearTextField();
+			vtnPrin.jBtnTermMod.setVisible(false);
+			if (miAnimalDAO.modificarRegistro(vtnPrin.jTfNombre.getText(), vtnPrin.jTfClase.getText(), vtnPrin.jTfEspecie.getText(), vtnPrin.jTfFamilia.getText(), 
+				vtnPrin.jTfFilum.getText(), vtnPrin.jTfGenero.getText(), vtnPrin.jTfOrden.getText(), vtnPrin.jTfSubFilum.getText())) {
+			VtnPrincipal.mostrarJOptionPane(10);
+			} else {
+				VtnPrincipal.mostrarJOptionPane(9);
+			}
+			obtenerRegistrosBaseDeDatos();
 		}
 		// configuracion del boton play sonido de la ventana principal
 		if (e.getSource() == vtnPrin.jBtnPlaySonido) {
@@ -304,7 +358,7 @@ public class Gestor implements ActionListener {
 			clip.open(audioInputStream);
 			clip.start();
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-			ex.printStackTrace();
+			
 		}
 	}
 
