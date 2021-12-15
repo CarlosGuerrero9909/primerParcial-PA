@@ -33,7 +33,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="246" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,7 +78,7 @@
                       <Component id="jTfClase" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTfOrden" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -153,7 +153,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Direccion de la imagen ejem: /data/Leon.gif"/>
+            <Property name="text" type="java.lang.String" value="Nombre y formato de la imagen, ej: Leon.gif"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTfDireImg">
@@ -266,7 +266,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Direccion del sonido, ejem: /src/data/Leon.wav"/>
+            <Property name="text" type="java.lang.String" value="Nombre y formato del sonido, ej: Leon.wav"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTfDireSon">

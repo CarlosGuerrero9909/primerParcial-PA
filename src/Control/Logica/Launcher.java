@@ -6,16 +6,16 @@ import Vista.VtnPrincipal;
 /**
  *
  * @author Carlos Guerrero
- * @author Nicolas Díaz
+ * @author Nicolas Dí­az
  */
 public class Launcher {
 
-	public static void main(String[] args) {
-		AnimalVO animal = new AnimalVO();
-		VtnPrincipal vtnPrin = new VtnPrincipal();
-		Gestor gestor = new Gestor(vtnPrin, animal);
-		gestor.iniciarVtnPrincipal();
-		vtnPrin.setVisible(true);
+    public static void main(String[] args) {
+        AnimalVO animal = new AnimalVO();
+        VtnPrincipal vtnPrin = new VtnPrincipal();
+        Gestor gestor = new Gestor(vtnPrin, animal);
+        gestor.iniciarVtnPrincipal();
+        vtnPrin.setVisible(true);
 
-	}
+    }
 }

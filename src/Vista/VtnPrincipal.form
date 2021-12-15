@@ -76,17 +76,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfFilum" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfSubFilum" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfClase" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfOrden" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="jTfSubFilum" alignment="0" pref="176" max="32767" attributes="0"/>
+                      <Component id="jTfClase" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTfOrden" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTfFilum" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -220,17 +220,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfFamilia" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfGenero" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfEspecie" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTfNombre" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="jTfFamilia" alignment="0" pref="176" max="32767" attributes="0"/>
+                      <Component id="jTfGenero" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTfEspecie" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTfNombre" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -372,7 +372,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jBtnAnterior">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Anterior"/>
+            <Property name="text" type="java.lang.String" value="Anterior Animal"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -380,7 +380,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBtnSiguiente">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Siguiente"/>
+            <Property name="text" type="java.lang.String" value="Siguiente Animal"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -404,7 +404,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBtnModificar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Modificar"/>
+            <Property name="text" type="java.lang.String" value="Modificar Animal"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -412,7 +412,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBtnEliminar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="text" type="java.lang.String" value="Eliminar Animal"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -420,7 +420,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBtnInsertar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Insertar Nuevo"/>
+            <Property name="text" type="java.lang.String" value="Insertar Nuevo Animal"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
