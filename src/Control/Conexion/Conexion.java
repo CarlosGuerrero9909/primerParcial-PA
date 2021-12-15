@@ -1,15 +1,18 @@
 package Control.Conexion;
 
+// importaciones necesarias para el funcionamiento del programa
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Establece el puente entre el cliente y el servidor
+ * Esta clase esta encargada de establecer el puente entre el cliente y el
+ * servidor por medio sql. Contine toda la informacion para el ingreso a la base
+ * de datos, por lo que si se desea pedir o enviar datos, se hace con esta clase
  *
  * @author Carlos Guerrero
- * @author Nicolas DÃ­az
+ * @author Nicolas Di­az
  */
 public class Conexion {
 
@@ -25,7 +28,7 @@ public class Conexion {
 
     /**
      * Metodo encargado de registrar el driver y establecer la conexion con la
-     * DB
+     * BD
      *
      * @return
      * @throws SQLException
@@ -37,7 +40,7 @@ public class Conexion {
     }
 
     /**
-     * Desconecta la DB
+     * Metodo encargado de desconectar la conexion con la base de datos
      */
     public static void desconectar() {
         cn = null;

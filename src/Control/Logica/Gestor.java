@@ -1,5 +1,6 @@
 package Control.Logica;
 
+// importaciones necesarias para el funcionamiento de todos los recursos usados en la clase
 import Control.Dao.AnimalDAO;
 import Modelo.AnimalVO;
 import Vista.VtnInsertar;
@@ -24,31 +25,47 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
+ * Esta clase se envarga de toda la logica del programa, haciendole peticiones a
+ * las demas clases y enviando datos, sin esta clase el programa no podria
+ * funcionar correctamente
  *
  * @author Carlos Guerrero
- * @author Nicolas DÃ­az
+ * @author Nicolas Di­az
  */
 public class Gestor implements ActionListener {
 
+    // variable de nuestra ventana principal
     private VtnPrincipal vtnPrin;
+    // variable de ventana ingresar que se mostrara al presionar el boton ingresar nuevo animal
     private VtnInsertar vtnIns;
+    // variable en el que se alojara el archivo properties que buscaremos posteriormente para registrar todoslo registros que contenga
     private Properties dataProperties;
+    // variable en el que se guardara el archivo properties que se elija al ejecutar la ventana de busqueda
     private File file;
+    // objeto de la clase AnimalDAO con el cual pediremos conexion a la base de datos para recuperar, ingresar, modificar y eliminar registros de la base de datos
     private AnimalDAO miAnimalDAO;
+    // arraylist en el que se guardaran todos los registros alojados en nuetra base de datos
     private ArrayList<AnimalVO> listaAnimales;
+    // variable con la que se controlara el animal que se esta mostransdo en la interfaz, ventan principal
     private int index;
+    // variable usada para la reproduccion de sonido
     private AudioInputStream audioInputStream;
+    // variable usada para la reproduccion de sonido
     private Clip clip;
+    // variable en el que se guardara el archivo aleatorio que se creara el la carpeta del proyecto con toda la informacion de la base de datos
     private RandomAccessFile archivo;
+    // variables usadas para creacion del archivo aleatorio, clave contrine el numero de registro
     private int clave;
+    // variable que contiene la cantidad de bytes que tiene 
     private long tamReg;
-    private long cantReg;
+    // variable en el que se guardara el archivo aleatorio que se elija al ejecutar la ventana de busqueda
     private File fileAleatorio;
 
     /**
      * Metodo constructor de la clase Gestor, encargado de iniciar los objetos y
      * principales acciones necesarias para el control y gestion de la logica
-     * del programa
+     * del programa. Para la instanciacion de este le debe llegar una ventana
+     * principal y un animal
      *
      * @param vtnPrin
      * @param animal
@@ -56,7 +73,9 @@ public class Gestor implements ActionListener {
     public Gestor(VtnPrincipal vtnPrin, AnimalVO animal) {
         this.vtnPrin = vtnPrin;
         vtnIns = new VtnInsertar(vtnPrin, true);
+        // indice para control de animal mostrado en ventana principal
         index = 0;
+        // instanciacion de arraylist donde se guardaran todos los registros de la base de datos
         listaAnimales = new ArrayList<>();
         // obtener registros de la base de datos
         obtenerRegistrosBaseDeDatos();
@@ -64,7 +83,7 @@ public class Gestor implements ActionListener {
         iniciandoProperties();
         // se carga el primer animal en la GUI
         cargarAnimalEnVtnPrincipal(index);
-        // se preparan los botones de la interfaz para que pueden escuchar instrucciones
+        // se preparan los botones de la interfaz para que pueda escuchar instrucciones
         this.vtnPrin.jBtnAnterior.addActionListener(this);
         this.vtnPrin.jBtnEliminar.addActionListener(this);
         this.vtnPrin.jBtnInsertar.addActionListener(this);
@@ -79,25 +98,6 @@ public class Gestor implements ActionListener {
     }
 
     /**
-     * Carga el archivo properties con una ventana de busqueda donde se alojan
-     * los animales que se desean ingresar a la base de datos, al ingresar a la
-     * base de datos la informacion se guarda en un archivo tipo aleatorio
-     */
-    public void iniciandoProperties() {
-        if (listaAnimales.isEmpty()) {
-            // inicializacion de los atributos que cargaran el archivo properties
-            dataProperties = new Properties();
-            dataProperties = cargarProperties();
-            // guarda informacion de archivo properties en la base de datos
-            guardarPropiedadesEnBaseDeDatos();
-            // Ventana emergente de confirmacion
-            VtnPrincipal.mostrarJOptionPane(6);
-            // obtener registros de la base de datos
-            obtenerRegistrosBaseDeDatos();
-        }
-    }
-
-    /**
      * Metodo encargado de iniciar la ventana principal, dandole una posicion y
      * un titulo
      */
@@ -106,6 +106,49 @@ public class Gestor implements ActionListener {
         vtnPrin.setTitle("Taxonomia del Reino: Animal");
         // configuracion de la posicion de la ventana
         vtnPrin.setLocationRelativeTo(null);
+    }
+
+    /**
+     * Recoge el arraylist con todos los animales registrados en la base de
+     * datos anteriormente, luego de esto guarda un archivo aleatorio con toda
+     * la informacion
+     */
+    private void obtenerRegistrosBaseDeDatos() {
+        // creacion de una nueva instancia animal Dao para su implementacion al recuperar una arraylist con todos los registros de la base de datos
+        miAnimalDAO = new AnimalDAO();
+        // le pide al dao la lista de animales porque es la que hace la consulta
+        listaAnimales = miAnimalDAO.recuperarListaDeAnimalesDeBaseDeDatos();
+        // si el tamaño del arraylist es de 0 da una ventana emergente comunicando que no existen registros por lo que pedira que se seleccione una archivo properties
+        if (listaAnimales.isEmpty()) {
+            // mostrar ventana emergente
+            VtnPrincipal.mostrarJOptionPane(2);
+        }
+        //crea el archivo aleatorio
+        crearArchivoAleatrio();
+        // se ejecuta metodos para guardar base de datos en archivo aleatorio
+        escribirEnArchivoAleatorio();
+        // cierra el archivo aleatorio
+        cerrarAleatorio();
+    }
+
+    /**
+     * Carga el archivo properties con una ventana de busqueda donde se alojan
+     * los animales que se desean ingresar a la base de datos, al ingresar a la
+     * base de datos la informacion se guarda en un archivo tipo aleatorio
+     */
+    public void iniciandoProperties() {
+        if (listaAnimales.isEmpty()) {
+            // inicializacion de los atributos que cargaran el archivo properties
+            dataProperties = new Properties();
+            // se le asocia el retorno de cargarProperties el cual abre una ventana de busqueda para elegir un archivo properties
+            dataProperties = cargarProperties();
+            // guarda informacion de archivo properties en la base de datos
+            guardarPropiedadesEnBaseDeDatos();
+            // Ventana emergente de confirmacion que comunica que "Se inserto registro(s) satisfactoriamente a la base de datos."
+            VtnPrincipal.mostrarJOptionPane(6);
+            // obtener registros de la base de datos en un arraylist
+            obtenerRegistrosBaseDeDatos();
+        }
     }
 
     /**
@@ -163,29 +206,6 @@ public class Gestor implements ActionListener {
             // se envia el animal al DAO para ser registrada en la base de datos
             miAnimalDAO.insertarRegistro(animalRegistro);
         }
-    }
-
-    /**
-     * Recoge el arraylist con todos los animales registrados en la base de
-     * datos anteriormente, luego de esto guarda un archivo aleatorio con toda
-     * la informacion
-     */
-    private void obtenerRegistrosBaseDeDatos() {
-        // creacion de una nueva instancia animal Dao para su implementacion al recuperar una arraylist con todos los registros de la base de datos
-        miAnimalDAO = new AnimalDAO();
-        // le pide al dao la lista de animales porque es la que hace la consulta
-        listaAnimales = miAnimalDAO.recuperarListaDeAnimalesDeBaseDeDatos();
-        // si el tamaño del arraylist es de 0 da una ventana emergente comunicando que no existen registros por lo que pedira que se seleccione una archivo properties
-        if (listaAnimales.isEmpty()) {
-            // mostrar ventana emergente
-            VtnPrincipal.mostrarJOptionPane(2);
-        }
-        //crea el archivo aleatorio
-        crearArchivoAleatrio();
-        // se ejecuta metodos para guardar base de datos en archivo aleatorio
-        escribirEnArchivoAleatorio();
-        // cierra el archivo aleatorio
-        cerrarAleatorio();
     }
 
     /**
@@ -416,7 +436,6 @@ public class Gestor implements ActionListener {
         clave = 0;
         // 400 bytes = 40b por campo ya que todos son strings y cada string debe tener maximo 20 carateres
         tamReg = 400;
-        cantReg = 0;
         //creando el archivo
         try {
             fileAleatorio = new File("aleatorio.dat");
