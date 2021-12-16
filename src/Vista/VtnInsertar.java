@@ -253,7 +253,7 @@ public class VtnInsertar extends javax.swing.JDialog {
 		jTfEspecie.setText("");
 		jTfNombre.setText("");
 		jTfDireImg.setText("");
-		jTfDireImg.setText("");
+		jTfDireSon.setText("");
 
 	}
 }
