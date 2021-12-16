@@ -1,0 +1,3 @@
+TABLA ANIMALES
+usuario=granja
+contraseña=granja
