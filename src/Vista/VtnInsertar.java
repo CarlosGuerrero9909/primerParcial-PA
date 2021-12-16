@@ -3,7 +3,7 @@ package Vista;
 /**
  *
  * @author Carlos Guerrero
- * @author Nicolas Díaz
+ * @author Nicolas Diaz
  */
 public class VtnInsertar extends javax.swing.JDialog {
 
