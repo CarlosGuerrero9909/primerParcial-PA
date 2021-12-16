@@ -1,0 +1,53 @@
+@startuml
+annotation java.lang.Override
+class Control.Dao.AnimalDAO
+class Control.Conexion.Conexion
+class Control.Logica.Gestor
+class Control.Logica.Launcher
+class Modelo.AnimalVO
+class Vista.VtnInsertar
+class Vista.VtnPrincipal
+class java.awt.Image
+class java.awt.event.ActionEvent
+class java.io.File
+class java.io.FileInputStream
+class java.io.FileNotFoundException
+class java.io.IOException
+class java.io.RandomAccessFile
+class java.nio.file.FileSystems
+class java.util.ArrayList
+class java.util.Properties
+class javax.sound.sampled.AudioInputStream
+class javax.sound.sampled.AudioSystem
+class javax.sound.sampled.Clip
+class javax.sound.sampled.LineUnavailableException
+class javax.sound.sampled.UnsupportedAudioFileException
+class javax.swing.Icon
+class javax.swing.ImageIcon
+interface java.awt.event.ActionListener
+Control.Logica.Gestor ..> java.lang.Override
+Control.Logica.Gestor ..> Control.Dao.AnimalDAO
+Control.Logica.Gestor ..> Modelo.AnimalVO
+Control.Logica.Gestor ..> Vista.VtnInsertar
+Control.Logica.Gestor ..> Vista.VtnPrincipal
+Control.Logica.Gestor ..> java.awt.Image
+Control.Logica.Gestor ..> java.awt.event.ActionEvent
+Control.Logica.Gestor ..> java.io.File
+Control.Logica.Gestor ..> java.io.FileInputStream
+Control.Logica.Gestor ..> java.io.FileNotFoundException
+Control.Logica.Gestor ..> java.io.IOException
+Control.Logica.Gestor ..> java.io.RandomAccessFile
+Control.Logica.Gestor ..> java.nio.file.FileSystems
+Control.Logica.Gestor ..> java.util.ArrayList
+Control.Logica.Gestor ..> java.util.Properties
+Control.Logica.Gestor ..> javax.sound.sampled.AudioInputStream
+Control.Logica.Gestor ..> javax.sound.sampled.AudioSystem
+Control.Logica.Gestor ..> javax.sound.sampled.Clip
+Control.Logica.Gestor ..> javax.sound.sampled.LineUnavailableException
+Control.Logica.Gestor ..> javax.sound.sampled.UnsupportedAudioFileException
+Control.Logica.Gestor ..> javax.swing.Icon
+Control.Logica.Gestor ..> javax.swing.ImageIcon
+Control.Logica.Gestor --|> java.awt.event.ActionListener
+Control.Logica.Launcher ..> Modelo.AnimalVO
+Control.Logica.Launcher ..> Vista.VtnPrincipal
+@enduml

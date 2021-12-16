@@ -1,0 +1,11 @@
+@startuml
+class Control.Conexion.Conexion
+class java.sql.Connection
+class java.sql.Driver
+class java.sql.DriverManager
+class java.sql.SQLException
+Control.Conexion.Conexion ..> java.sql.Connection
+Control.Conexion.Conexion ..> java.sql.Driver
+Control.Conexion.Conexion ..> java.sql.DriverManager
+Control.Conexion.Conexion ..> java.sql.SQLException
+@enduml
